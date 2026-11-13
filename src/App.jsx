@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { ArrowUpRight, BedDouble, Bath, ChefHat, Sofa, Maximize2, MapPin, ChevronRight, ChevronLeft, Move3D, LayoutGrid, Sun, ShieldCheck, Wifi, CarFront, Trees, X, Check, CalendarDays, Phone, Menu, Sparkles, Ruler, Home, Camera, Compass } from 'lucide-react'
+import { ArrowUpRight, BedDouble, Bath, ChefHat, Sofa, MapPin, ChevronRight, ChevronLeft, Move3D, LayoutGrid, Sun, ShieldCheck, Wifi, Trees, X, Check, Menu, Sparkles, Ruler, Camera, Compass } from 'lucide-react'
 
 const rooms = [
   { id:'living', name:'Living room', type:'Living space', size:'34.8 m²', dims:'6.0 × 5.8 m', area:34.8, icon:Sofa, description:'A generous open living space with floor-to-ceiling glazing, warm oak flooring and room for relaxed entertaining.', features:['Floor-to-ceiling windows','Oak engineered flooring','South-facing light'], image:'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85', color:'#d9c4a2' },
@@ -132,7 +132,7 @@ function App(){
   const [mobileMenu,setMobileMenu]=useState(false)
   const room=rooms.find(r=>r.id===selected)||rooms[0]
   const Icon=room.icon
-  const selectRoom=(id)=>{setSelected(id);setMode('room')}
+  const selectRoom=useCallback((id)=>{setSelected(id);setMode('room')},[])
   const total=rooms.reduce((n,r)=>n+r.area,0)
   return <div className="app-shell">
     <header className="topbar">
